@@ -1,4 +1,4 @@
-package Lesson3.LAB3;
+package Lesson3.HW3;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,29 +9,22 @@ public class Main {
     private static SessionFactory sessionFactory;
 
     public static void main(String[] args) {
-
         sessionFactory = new Configuration()
-                .configure("hib.xml")
+                .configure("hibhw3.xml")
                 .buildSessionFactory();
 
-        Person person1 = new Person();
-        person1.setName("John");
-        person1.setAge(25);
-        person1.setGender("Male");
-        addPerson(person1);
+        Animal animal1 = new Animal(5, "Barsik", true);
+        Animal animal2 = new Animal(7, "Som", false);
 
-        Person person2 = new Person();
-        person2.setName("Jenn");
-        person2.setAge(22);
-        person2.setGender("Female");
-        addPerson(person2);
+        addAnimal(animal1);
+        addAnimal(animal2);
     }
 
-    public static void addPerson(Person person) {
+    public static void addAnimal(Animal animal) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.save(person);
+        session.save(animal);
         transaction.commit();
         session.close();
     }
